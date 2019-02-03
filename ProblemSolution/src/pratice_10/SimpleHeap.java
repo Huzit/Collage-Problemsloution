@@ -18,8 +18,7 @@ public class SimpleHeap {
 		if(last+1==MaxHeapSize) resize();
 		heap[++last]=data;//힙의 마지막부분에 새 자료 삽입	
 		
-		int child=last;
-		while(child>0) {
+		for(int child=last;child>0;) {
 			int parent=(child-1)/2; //힙에서의 순서
 			if(heap[child]<=heap[parent])break; //부모노드가 자식노드보다 크면 중지
 			swap(child,parent); //아닐경우 스왑
@@ -29,7 +28,7 @@ public class SimpleHeap {
 	public int remove() {
 		if(last<0)throw new RuntimeException("heap empty");
 		int data=heap[0];//루트노드의 자료 추출
-		heap[0]=heap[last-1];
+		heap[0]=heap[last--];
 		
 		for(int parent=0, child=2*parent+1; child<=last; parent=child, child=2*parent+1) {
 			if(child<last && heap[child]<heap[child+1]) child++;
